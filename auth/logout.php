@@ -9,6 +9,6 @@
     session_destroy();
     
     // Redirect to login page
-    header('location:' . $_SERVER['HTTP_HOST'] . 'ticketsystem/auth/login.php');
+    header('location: /ticketsystem/auth/login.php');
     exit;
 ?>
