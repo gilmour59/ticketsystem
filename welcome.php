@@ -1,6 +1,8 @@
 <?php
     // Initialize the session
     session_start();
+
+    require_once("admin/authorize-normal.php");
 ?>
  
 <!DOCTYPE html>
@@ -19,7 +21,7 @@
             <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome.</h1>
         </div>
         <p>
-            <a href="logout.php" class="btn btn-danger">Sign Out of Your Account</a>
+            <a href="auth/logout.php" class="btn btn-danger">Sign Out of Your Account</a>
         </p>
     </body>
 </html>
