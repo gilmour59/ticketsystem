@@ -22,9 +22,6 @@
         $admin_password = password_hash('Admin123', PASSWORD_DEFAULT);
         $create_admin = "INSERT INTO users (username, password, department, role) VALUES ('admin', '$admin_password', 'IT', 'admin')";
 
-        mysqli_query($link, $create_admin);
-    }
-
-    // Close connection
-    mysqli_close($link);
+        mysqli_query($link, $create_admin);        
+    }    
 ?>
