@@ -102,33 +102,49 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <?php
             include_once('../css.php');
         ?>
-        <style type="text/css">
-            body{ font: 14px sans-serif; }
-            .wrapper{ width: 350px; padding: 20px; }
-        </style>
+        <link rel="stylesheet" type="text/css" href="../css/fonts/font-awesome-4.7.0/css/font-awesome.min.css">    
+        <link rel="stylesheet" type="text/css" href="../css/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">    
+        <link rel="stylesheet" type="text/css" href="../css/login/animate.css">    
+        <link rel="stylesheet" type="text/css" href="../css/login/hamburgers.min.css">    
+        <link rel="stylesheet" type="text/css" href="../css/login/animsition.min.css">    
+        <link rel="stylesheet" type="text/css" href="../css/login/select2.min.css">    
+        <link rel="stylesheet" type="text/css" href="../css/login/daterangepicker.css">    
+        <link rel="stylesheet" type="text/css" href="../css/login/util.css">
+        <link rel="stylesheet" type="text/css" href="../css/login/main.css">
     </head>
-    <body>
-        <div class="wrapper">
-            <h2>Login</h2>
-            <p>Please fill in your credentials to login.</p>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                    <label>Username</label>
-                    <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
-                    <span class="help-block"><?php echo $username_err; ?></span>
-                </div>    
-                <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-                    <label>Password</label>
-                    <input type="password" name="password" class="form-control">
-                    <span class="help-block"><?php echo $password_err; ?></span>
+    <body>                
+        <div class="limiter">
+            <div class="container-login100">
+                <div class="wrap-login100 p-b-160 p-t-50">
+                    <form id="login-form" class="login100-form validate-form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                        <span class="login100-form-title p-b-43">
+                            Account Login
+                        </span>                        
+                        <div class="wrap-input100 rs1 validate-input" data-validate="required">
+                            <input class="input100" type="text" name="username">
+                            <span class="label-input100">Username</span>
+                        </div>                                                
+                        <div class="wrap-input100 rs2 validate-input" data-validate="required">
+                            <input class="input100" type="password" name="pass">
+                            <span class="label-input100">Password</span>
+                        </div>
+                        <div class="container-login100-form-btn">
+                            <button type="submit" form="login-form" class="login100-form-btn" value="Submit">
+                                Sign in
+                            </button>
+                        </div>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Login">
-                </div>                
-            </form>
+            </div>
         </div>
         <?php
             include_once('../js.php');
-        ?>
+        ?>        
+        <script src="../js/login/animsition.min.js"></script>
+        <script src="../js/login/select2.min.js"></script>
+        <script src="../js/login/moment.min.js"></script>
+        <script src="../js/login/daterangepicker.js"></script>
+        <script src="../js/login/countdowntime.js"></script>
+        <script src="../js/login/main.js"></script>
     </body>
 </html>
