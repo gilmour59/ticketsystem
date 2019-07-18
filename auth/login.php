@@ -125,7 +125,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <span class="label-input100">Username</span>
                         </div>                                                
                         <div class="wrap-input100 rs2 validate-input" data-validate="required">
-                            <input class="input100" type="password" name="pass">
+                            <input class="input100" type="password" name="password">
                             <span class="label-input100">Password</span>
                         </div>
                         <div class="container-login100-form-btn">
