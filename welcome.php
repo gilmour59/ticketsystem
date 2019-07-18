@@ -11,7 +11,7 @@
         <meta charset="UTF-8">
         <title>Welcome</title>
         <?php
-            include_once('/ticketsystem/css.php');
+            include_once('css.php');
         ?>
         <style type="text/css">
             body{ font: 14px sans-serif; text-align: center; }
@@ -25,7 +25,7 @@
             <a href="auth/logout.php" class="btn btn-danger">Sign Out of Your Account</a>
         </p>
         <?php
-            include_once('/ticketsystem/js.php');
+            include_once('js.php');
         ?>
     </body>
 </html>

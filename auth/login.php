@@ -100,7 +100,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <meta charset="UTF-8">
         <title>Login</title>
         <?php
-            include_once('/ticketsystem/css.php');
+            include_once('../css.php');
         ?>
         <style type="text/css">
             body{ font: 14px sans-serif; }
@@ -128,7 +128,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </form>
         </div>
         <?php
-            include_once('/ticketsystem/js.php');
+            include_once('../js.php');
         ?>
     </body>
 </html>

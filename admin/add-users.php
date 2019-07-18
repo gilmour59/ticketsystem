@@ -102,7 +102,7 @@
         <meta charset="UTF-8">
         <title>Sign Up</title>
         <?php
-            include_once('/ticketsystem/css.php');
+            include_once('../css.php');
         ?>
         <style type="text/css">
             body{ font: 14px sans-serif; }
@@ -136,7 +136,7 @@
             </form>
         </div>
         <?php
-            include_once('/ticketsystem/js.php');
+            include_once('../js.php');
         ?>
     </body>
 </html>

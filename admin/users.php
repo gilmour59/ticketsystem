@@ -15,7 +15,7 @@
         <meta charset="UTF-8">
         <title>Users</title>
         <?php
-            include_once('/ticketsystem/css.php');
+            include_once('../css.php');
         ?>
         <style type="text/css">
             body{ font: 14px sans-serif; }
@@ -51,7 +51,7 @@
             </table>
         </div>
         <?php
-            include_once('/ticketsystem/js.php');
+            include_once('../js.php');
         ?>
     </body>
 </html>
