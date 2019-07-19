@@ -89,8 +89,7 @@
                 
                 // Attempt to execute the prepared statement
                 if(mysqli_stmt_execute($stmt)){
-                    // Redirect to login page
-                    //header("location: ../auth/login.php");
+                    $username = $password = $confirm_password = "";
                 } else{
                     echo "Something went wrong. Please try again later.";
                 }
