@@ -34,6 +34,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
     // Validate credentials
     if(empty($username_err) && empty($password_err)){
+        /* Attempt to connect to MySQL database */
+        $link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+        
         // Prepare a select statement
         $sql = "SELECT user_id, username, password, role FROM users WHERE username = ?";
         
