@@ -108,6 +108,7 @@
         <meta charset="UTF-8">
         <title>Users</title>
         <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../datatables/datatables.min.css">
     </head>
     <body>
         <div class="container">     
@@ -164,7 +165,7 @@
                     </div>
                 </div>
             </div>
-            <table class="table table-bordered">
+            <table id="userTable" class="table table-bordered">
                 <thead>
                     <th>Department</th>
                     <th>Username</th>
@@ -172,7 +173,7 @@
                     <th>Created At</th>
                 </thead>
             <?php
-                /* Attempt to connect to MySQL database */
+                /* Attempt to connect to MySQL database 
                 $link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
                 
                 $query = "SELECT * FROM users ORDER BY role ASC, department ASC";            
@@ -188,12 +189,32 @@
                         echo '</tr>';
                     }
                 }
-                mysqli_close($link);
+                mysqli_close($link); */
             ?>
             </table>
         </div>
         <script src="../js/jquery-3.4.1.min.js"></script>
         <script src="../js/popper.min.js"></script>
         <script src="../js/bootstrap.min.js"></script>
+        <script src="../datatables/datatables.min.js"></script>
+        <script>
+            $(function() {
+                $('#userTable').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: {
+                        "url": "get-users.php",
+                        "type": "GET",
+                        "dataSrc": ""
+                    },
+                    columns: [
+                        { data: 'department' },
+                        { data: 'username' },
+                        { data: 'role' },
+                        { data: 'created_at' },
+                    ]
+                });
+            });            
+        </script>
     </body>
 </html>
