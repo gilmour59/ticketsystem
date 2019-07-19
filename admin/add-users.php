@@ -107,11 +107,13 @@
         <link rel="stylesheet" href="../css/bootstrap.min.css">
         <style type="text/css">
             body{ font: 14px sans-serif; }
-            .wrapper{ width: 350px; padding: 20px; }
         </style>
     </head>
     <body>
-        <div class="wrapper">
+        <div class="container">
+            <div class="my-3">
+                <a class="btn btn-danger" href="users.php">Go Back</a>
+            </div>
             <h2>Add User</h2>
             <p>Please fill this form to create an account.</p>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">

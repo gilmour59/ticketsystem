@@ -16,12 +16,18 @@
         <link rel="stylesheet" href="../css/bootstrap.min.css">
         <style type="text/css">
             body{ font: 14px sans-serif; }
-            .wrapper{ width: 350px; padding: 20px; }
         </style>
     </head>
     <body>
-        <div class="container">
-            <h2>Users</h2>
+        <div class="container">     
+            <div class="row my-3">
+                <div class="col-md-8">
+                    <h2>Users</h2>
+                </div>                                      
+                <div class="col-md-4">
+                    <a class="float-right btn btn-info" href="add-users.php">Add User</a>
+                </div>      
+            </div>                   
             <table class="table table-bordered">
                 <thead>
                     <th>Department</th>
