@@ -99,9 +99,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <head>
         <meta charset="UTF-8">
         <title>Login</title>
-        <?php
-            include_once('../css.php');
-        ?>
+        <link rel="stylesheet" href="/ticketsystem/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="../css/fonts/font-awesome-4.7.0/css/font-awesome.min.css">    
         <link rel="stylesheet" type="text/css" href="../css/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">    
         <link rel="stylesheet" type="text/css" href="../css/login/animate.css">    
@@ -137,9 +135,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 </div>
             </div>
         </div>
-        <?php
-            include_once('../js.php');
-        ?>        
+        <script src="/ticketsystem/js/jquery-3.4.1.min.js"></script>
+        <script src="/ticketsystem/js/popper.min.js"></script>
+        <script src="/ticketsystem/js/bootstrap.min.js"></script>      
         <script src="../js/login/animsition.min.js"></script>
         <script src="../js/login/select2.min.js"></script>
         <script src="../js/login/moment.min.js"></script>

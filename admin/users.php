@@ -14,9 +14,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Users</title>
-        <?php
-            include_once('../css.php');
-        ?>
+        <link rel="stylesheet" href="/ticketsystem/css/bootstrap.min.css">
         <style type="text/css">
             body{ font: 14px sans-serif; }
             .wrapper{ width: 350px; padding: 20px; }
@@ -50,8 +48,8 @@
             ?>
             </table>
         </div>
-        <?php
-            include_once('../js.php');
-        ?>
+        <script src="/ticketsystem/js/jquery-3.4.1.min.js"></script>
+        <script src="/ticketsystem/js/popper.min.js"></script>
+        <script src="/ticketsystem/js/bootstrap.min.js"></script>
     </body>
 </html>
