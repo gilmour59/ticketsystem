@@ -1,7 +1,7 @@
 <?php
 // Initialize the session
 session_start();
- 
+
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     header('location: /ticketsystem/welcome.php');
@@ -65,11 +65,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["role"] = $role;
 
                             if($role === "admin"){
-                                // Redirect user to admin dashboard
-                                header("location: ../admin/users.php");
+                                if(isset($_SESSION['url'])) {
+                                    // holds url for last page visited.
+                                    $url = $_SESSION['url']; 
+                                }else{
+                                    // Redirect user to admin dashboard
+                                    $url = "../admin/users.php"; 
+                                }
+                                header("Location: $url");
+
                             }else{
-                                // Redirect user to welcome page
-                                header("location: ../welcome.php");
+                                if(isset($_SESSION['url'])) {
+                                    // holds url for last page visited.
+                                    $url = $_SESSION['url']; 
+                                }else{
+                                    // Redirect user to admin dashboard
+                                    $url = "../welcome.php"; 
+                                }
+                                header("Location: $url");
                             }                                                    
                         } else{
                             // Display an error message if password is not valid
