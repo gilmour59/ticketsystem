@@ -125,10 +125,41 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <link rel="stylesheet" type="text/css" href="../css/login/daterangepicker.css">    
         <link rel="stylesheet" type="text/css" href="../css/login/util.css">
         <link rel="stylesheet" type="text/css" href="../css/login/main.css">
+        <style>
+            .login-form-btn-black{
+                font-family: OpenSans-Bold;
+                font-size: 15px;
+                color: #fff;
+                line-height: 1.2;
+                text-transform: uppercase;
+
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: -moz-box;
+                display: -ms-flexbox;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0 20px;
+                width: 100%;
+                height: 70px;
+                border-bottom-left-radius: 12px;
+                border-bottom-right-radius: 12px;
+                overflow: hidden;
+                background: #111111;
+
+                -webkit-transition: all 0.4s;
+                -o-transition: all 0.4s;
+                -moz-transition: all 0.4s;
+                transition: all 0.4s;
+                position: relative;
+                z-index: 1;
+            }
+        </style>
     </head>
     <body>                
         <div class="limiter">
-            <div class="container-login100">
+            <div class="container-login100" style="background: #787989;">
                 <div class="wrap-login100 p-b-160 p-t-50">
                     <form id="login-form" class="login100-form validate-form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <span class="login100-form-title p-b-43">
@@ -143,7 +174,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <span class="label-input100">Password</span>
                         </div>
                         <div class="container-login100-form-btn">
-                            <button type="submit" form="login-form" class="login100-form-btn" value="Submit">
+                            <button type="submit" form="login-form" class="login-form-btn-black" value="Submit">
                                 Sign in
                             </button>
                         </div>
