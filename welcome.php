@@ -10,7 +10,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Welcome</title>
-        <link rel="stylesheet" href="/ticketsystem/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
         <style type="text/css">
             body{ font: 14px sans-serif; text-align: center; }
         </style>
@@ -22,8 +22,8 @@
         <p>
             <a href="auth/logout.php" class="btn btn-danger">Sign Out of Your Account</a>
         </p>
-        <script src="/ticketsystem/js/jquery-3.4.1.min.js"></script>
-        <script src="/ticketsystem/js/popper.min.js"></script>
-        <script src="/ticketsystem/js/bootstrap.min.js"></script>
+        <script src="js/jquery-3.4.1.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
     </body>
 </html>

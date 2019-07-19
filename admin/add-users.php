@@ -86,7 +86,7 @@
                 // Attempt to execute the prepared statement
                 if(mysqli_stmt_execute($stmt)){
                     // Redirect to login page
-                    header("location: /ticketsystem/auth/login.php");
+                    header("location: ../auth/login.php");
                 } else{
                     echo "Something went wrong. Please try again later.";
                 }
@@ -104,7 +104,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Sign Up</title>
-        <link rel="stylesheet" href="/ticketsystem/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
         <style type="text/css">
             body{ font: 14px sans-serif; }
             .wrapper{ width: 350px; padding: 20px; }
@@ -142,8 +142,8 @@
                 </div>
             </form>
         </div>
-        <script src="/ticketsystem/js/jquery-3.4.1.min.js"></script>
-        <script src="/ticketsystem/js/popper.min.js"></script>
-        <script src="/ticketsystem/js/bootstrap.min.js"></script>
+        <script src="../js/jquery-3.4.1.min.js"></script>
+        <script src="../js/popper.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
     </body>
 </html>
