@@ -1,8 +1,7 @@
 <?php
     session_start();
 
-    //Authorization; normal always first!
-    require_once("authorize-normal.php");
+    //Authorization;
     require_once("authorize-admin.php");
     
     // Include config file
