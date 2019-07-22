@@ -165,7 +165,7 @@
                     </div>
                 </div>
             </div>
-            <table id="userTable" class="table table-bordered">
+            <table id="userTable" class="table table-striped">
                 <thead>
                     <th>Department</th>
                     <th>Username</th>
@@ -198,21 +198,10 @@
         <script src="../js/bootstrap.min.js"></script>
         <script src="../datatables/datatables.min.js"></script>
         <script>
-            $(function() {
-                $('#userTable').DataTable({
-                    processing: true,
-                    serverSide: true,
-                    ajax: {
-                        "url": "get-users.php",
-                        "type": "GET",
-                        "dataSrc": ""
-                    },
-                    columns: [
-                        { data: 'department' },
-                        { data: 'username' },
-                        { data: 'role' },
-                        { data: 'created_at' },
-                    ]
+            $(document).ready(function() {
+                datatable = $('#userTable').DataTable({
+                    'ajax': 'get-users.php',
+                    'order': [],
                 });
             });            
         </script>
