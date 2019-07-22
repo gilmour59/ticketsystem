@@ -1,6 +1,4 @@
 <?php
-    session_start();
-
     //Authorization
     require_once("authorize-admin.php");
 
@@ -165,32 +163,14 @@
                     </div>
                 </div>
             </div>
-            <table id="userTable" class="table table-striped">
+            <table id="userTable" class="table table-striped table-sm table-hover">
                 <thead>
-                    <th>Department</th>
-                    <th>Username</th>
-                    <th>Role</th>
-                    <th>Created At</th>
-                </thead>
-            <?php
-                /* Attempt to connect to MySQL database 
-                $link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-                
-                $query = "SELECT * FROM users ORDER BY role ASC, department ASC";            
-                $data = mysqli_query($link, $query);
-
-                if (mysqli_num_rows($data) > 0){
-                    while ($row = mysqli_fetch_assoc($data)) {
-                        echo '<tr>';
-                        echo '<td>' . $row['department'] . '</td>';
-                        echo '<td>' . $row['username'] . '</td>';
-                        echo '<td>' . $row['role'] . '</td>';
-                        echo '<td>' . $row['created_at'] . '</td>';
-                        echo '</tr>';
-                    }
-                }
-                mysqli_close($link); */
-            ?>
+                    <th width="10%">Department</th>
+                    <th width="10%">Username</th>
+                    <th width="5%">Role</th>
+                    <th width="10%">Created At</th>
+                    <th width="5%"></th>
+                </thead>            
             </table>
         </div>
         <script src="../js/jquery-3.4.1.min.js"></script>

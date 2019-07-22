@@ -1,6 +1,4 @@
 <?php
-    session_start();
-
     //Authorization;
     require_once("authorize-admin.php");
     
