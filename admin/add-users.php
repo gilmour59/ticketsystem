@@ -5,7 +5,7 @@
     // Include config file
     require_once("../config/connectvars.php");
 
-    $valid['success'] = array('success' => false, 'messages' => array());
+    $valid = array('success' => false, 'messages' => array());
 
     // Define variables and initialize with empty values
     $username = $password = $confirm_password = "";
@@ -14,8 +14,7 @@
     // Processing form data when form is submitted
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $username = trim($_POST["username"]);
-        $role = $_POST["role"];
-
+        
         // Validate username
         if(empty(trim($_POST["username"]))){
             $username_err = "Please enter a username.";
@@ -48,7 +47,8 @@
                         $username = trim($_POST["username"]);
                     }
                 } else{
-                    echo "Oops! Something went wrong. Please try again later.";
+                    $valid['success'] = false;
+                    $valid['messages']['error'] = "Oops! Something went wrong. Please try again later.";
                 }
                 // Close statement
                 mysqli_stmt_close($stmt);
@@ -102,7 +102,8 @@
                     $username = $password = $confirm_password = "";
                     $valid['success'] = true;
                 } else{
-                    echo "Something went wrong. Please try again later.";
+                    $valid['success'] = false;
+                    $valid['messages']['error'] = "Oops! Something went wrong. Please try again later.";
                 }
                 // Close statement
                 mysqli_stmt_close($stmt);
@@ -111,4 +112,5 @@
         // Close connection
         mysqli_close($link);
     }
+
     echo json_encode($valid);

@@ -1,109 +1,75 @@
+function refreshAddModal(){	
+	// remove text from invalid
+	$('.invalid-feedback').text('');
+	$('#username').removeClass('is-invalid');
+	$('#password').removeClass('is-invalid');
+	$('#confirm_password').removeClass('is-invalid');
+}
+
 $(document).ready(function() {
-    datatable = $('#userTable').DataTable({
+    var user_datatable = $('#userTable').DataTable({
         'ajax': 'get-users.php',
         'order': [],
 	});
-	
-	/* $(document).on('submit', '#deleteCivilServiceForm', function(event){
-		event.preventDefault();
-		$.ajax({
-			type: 'POST',
-			data: new FormData(this),
-			url: $(this).attr('action'),
-			processData: false,
-			contentType: false,
-			success: function(data) {      
-				if(data.error){
-					toastr.error(data.error);
-				}else{                                               
-					toastr.success('Record was successfully Deleted!')
-					$("#deleteModal").modal('hide').on('hidden.bs.modal', function(){
-						ajaxLoad('{{ isset($user_id) ? route('admin.civil_service.index', $user_id) : route('civil_service.index') }}');
-					});  
-				}
-			},
-			error: function (jqXHR, textStatus, errorThrown) {
-				alert('Error Status: ' + jqXHR.status);
-			}
-		});
-	}); */
 
-	$(document).on('submit', '#deleteCivilServiceForm', function(event){
-		event.preventDefault();
+	$('#addUserModalBtn').on('click', function(){
 		// reset the form text
-		$("#submitCategoriesForm")[0].reset();
-		// remove the error text
-		$(".text-danger").remove();
-		// remove the form error
-		$('.form-group').removeClass('has-error').removeClass('has-success');
+		$("#addUserForm")[0].reset();
+		refreshAddModal();
 
-		// submit categories form function
-		$("#submitCategoriesForm").unbind('submit').bind('submit', function() {
+		$(document).on('submit', '#addUserForm', function(event){
+			event.preventDefault();
 
-			var categoriesName = $("#categoriesName").val();
-			var categoriesStatus = $("#categoriesStatus").val();
+			refreshAddModal();
 
-			if(categoriesName == "") {
-				$("#categoriesName").after('<p class="text-danger">Brand Name field is required</p>');
-				$('#categoriesName').closest('.form-group').addClass('has-error');
-			} else {
-				// remov error text field
-				$("#categoriesName").find('.text-danger').remove();
-				// success out for form 
-				$("#categoriesName").closest('.form-group').addClass('has-success');	  	
+			var username = $("#username").val();		
+
+			if(username == "") {
+				$("#username").addClass('is-invalid');
+				$('#username_invalid').text('Please enter username!');
 			}
-
-			if(categoriesStatus == "") {
-				$("#categoriesStatus").after('<p class="text-danger">Brand Name field is required</p>');
-				$('#categoriesStatus').closest('.form-group').addClass('has-error');
-			} else {
-				// remov error text field
-				$("#categoriesStatus").find('.text-danger').remove();
-				// success out for form 
-				$("#categoriesStatus").closest('.form-group').addClass('has-success');	  	
-			}
-
-			if(categoriesName && categoriesStatus) {
+			if(username){
 				var form = $(this);
 				// button loading
-				$("#createCategoriesBtn").button('loading');
+				$("#add-loading").removeClass('d-none');
 
 				$.ajax({
-					url : form.attr('action'),
-					type: form.attr('method'),
+					url : 'add-users.php',
+					type: 'POST',
 					data: form.serialize(),
 					dataType: 'json',
 					success:function(response) {
-						// button loading
-						$("#createCategoriesBtn").button('reset');
-
+						//remove loading
+						$("#add-loading").addClass('d-none');
+						console.log(response);
 						if(response.success == true) {
 							// reload the manage member table 
-							manageCategoriesTable.ajax.reload(null, false);						
+							user_datatable.ajax.reload(null, false);	
 
-	  	  			        // reset the form text
-							$("#submitCategoriesForm")[0].reset();
-							// remove the error text
-							$(".text-danger").remove();
-							// remove the form error
-							$('.form-group').removeClass('has-error').removeClass('has-success');
-	  	  			
-	  	  			$('#add-categories-messages').html('<div class="alert alert-success">'+
-	            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-	            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
-		          '</div>');
-
-	  	  			$(".alert-success").delay(500).show(10, function() {
-								$(this).delay(3000).hide(10, function() {
-									$(this).remove();
-								});
-							});
-						} 
-
-					} 
-				}); 
-			} 
-
+							// reset the form text
+							$("#addUserForm")[0].reset();					
+							refreshAddModal();		
+																				
+						}else if(response.success == false){
+							if(response.messages.username){
+								$('#username').addClass('is-invalid');
+								$('#username_invalid').text(response.messages.username);
+							}
+							if(response.messages.password){
+								$('#password').addClass('is-invalid');
+								$('#password_invalid').text(response.messages.password);
+							}
+							if(response.messages.confirm_password){
+								$('#confirm_password').addClass('is-invalid');
+								$('#confirm_password_invalid').text(response.messages.confirm_password);
+							}
+							if(response.messages.error){
+								//toastr
+							}
+						}
+					}
+				});
+			}						
 			return false;
 		});
 	});

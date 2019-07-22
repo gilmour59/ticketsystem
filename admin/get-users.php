@@ -7,7 +7,7 @@
     /* Attempt to connect to MySQL database */
     $link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
                 
-    $query = "SELECT user_id, division_id, username, role, created_at FROM users ORDER BY role ASC, division_id ASC";            
+    $query = "SELECT user_id, division_id, username, role, created_at FROM users ORDER BY created_at DESC, role ASC, division_id ASC";            
     $result = mysqli_query($link, $query);
 
     $output = array('data' => array());
