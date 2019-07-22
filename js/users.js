@@ -12,6 +12,20 @@ $(document).ready(function() {
         'order': [],
 	});
 
+	//checkbox on edit model
+	$('#edit_password').prop('disabled', true);
+	$('#edit_confirm_password').prop('disabled', true);
+
+	$('#change_password').change(function() {
+		if($('#change_password').is(':checked')){
+			$('#edit_password').prop('disabled', false);
+			$('#edit_confirm_password').prop('disabled', false);
+		}else{
+			$('#edit_password').prop('disabled', true);
+			$('#edit_confirm_password').prop('disabled', true);
+		}
+	});	
+
 	$('#addUserModalBtn').on('click', function(){
 		// reset the form text
 		$("#addUserForm")[0].reset();
@@ -75,113 +89,64 @@ $(document).ready(function() {
 	});
 });
 
+function refreshEditModal(){	
+	// remove text from invalid
+	$('.invalid-feedback').text('');
+	$('#edit_username').removeClass('is-invalid');
+	$('#edit_role').removeClass('is-invalid');
+	//$('#edit_division').removeClass('is-invalid');
+	$('#edit_password').removeClass('is-invalid');
+	$('#edit_confirm_password').removeClass('is-invalid');
+}
+
 function editUser(user_id = null) {
 	if(user_id) {
-		// remove the added categories id 
-		$('#editCategoriesId').remove();
-		// reset the form text
-		$("#editCategoriesForm")[0].reset();
-		// reset the form text-error
-		$(".text-danger").remove();
-		// reset the form group errro		
-		$('.form-group').removeClass('has-error').removeClass('has-success');
+		// remove the added user id 
+		$('#edit_user_id').remove();
 
-		// edit categories messages
-		$("#edit-categories-messages").html("");
-		// modal spinner
-		$('.modal-loading').removeClass('div-hide');
-		// modal result
-		$('.edit-categories-result').addClass('div-hide');
-		//modal footer
-		$(".editCategoriesFooter").addClass('div-hide');		
+		// reset the form text
+		$("#editUserForm")[0].reset();
+		refreshEditModal();				
 
 		$.ajax({
-			url: 'php_action/fetchSelectedCategories.php',
+			url: 'get-selected-user.php',
 			type: 'post',
 			data: {user_id: user_id},
 			dataType: 'json',
-			success:function(response) {
+			success:function(response) {				
+				$("#edit_username").val(response.username);
+				$("#edit_role").val(response.role);
+				//$("#edit_division").val(response.division);
 
-				// modal spinner
-				$('.modal-loading').addClass('div-hide');
-				// modal result
-				$('.edit-categories-result').removeClass('div-hide');
-				//modal footer
-				$(".editCategoriesFooter").removeClass('div-hide');	
+				// add the user id 
+				$("#editUserFooter").after('<input type="hidden" name="edit_user_id" id="edit_user_id" value="' + response.user_id + '" />');
+				
+				$(document).on('submit', '#editUserForm', function(event){
+					event.preventDefault();
 
-				// set the categories name
-				$("#editCategoriesName").val(response.categories_name);
-				// set the categories status
-				$("#editCategoriesStatus").val(response.categories_active);
-				// add the categories id 
-				$(".editCategoriesFooter").after('<input type="hidden" name="editCategoriesId" id="editCategoriesId" value="'+response.categories_id+'" />');
+					refreshEditModal();
 
+					var form = $(this);
+					// button loading
+					$("#edit-loading").removeClass('d-none');
 
-				// submit of edit categories form
-				$("#editCategoriesForm").unbind('submit').bind('submit', function() {
-					var categoriesName = $("#editCategoriesName").val();
-					var categoriesStatus = $("#editCategoriesStatus").val();
+					$.ajax({
+						url : form.attr('action'),
+						type: form.attr('method'),
+						data: form.serialize(),
+						dataType: 'json',
+						success:function(response) {
+							// remove loading
+							$("#edit-loading").addClass('d-none');
 
-					if(categoriesName == "") {
-						$("#editCategoriesName").after('<p class="text-danger">Brand Name field is required</p>');
-						$('#editCategoriesName').closest('.form-group').addClass('has-error');
-					} else {
-						// remov error text field
-						$("#editCategoriesName").find('.text-danger').remove();
-						// success out for form 
-						$("#editCategoriesName").closest('.form-group').addClass('has-success');	  	
-					}
-
-					if(categoriesStatus == "") {
-						$("#editCategoriesStatus").after('<p class="text-danger">Brand Name field is required</p>');
-						$('#editCategoriesStatus').closest('.form-group').addClass('has-error');
-					} else {
-						// remov error text field
-						$("#editCategoriesStatus").find('.text-danger').remove();
-						// success out for form 
-						$("#editCategoriesStatus").closest('.form-group').addClass('has-success');	  	
-					}
-
-					if(categoriesName && categoriesStatus) {
-						var form = $(this);
-						// button loading
-						$("#editCategoriesBtn").button('loading');
-
-						$.ajax({
-							url : form.attr('action'),
-							type: form.attr('method'),
-							data: form.serialize(),
-							dataType: 'json',
-							success:function(response) {
-								// button loading
-								$("#editCategoriesBtn").button('reset');
-
-								if(response.success == true) {
-									// reload the manage member table 
-									manageCategoriesTable.ajax.reload(null, false);									  	  			
-									
-									// remove the error text
-									$(".text-danger").remove();
-									// remove the form error
-									$('.form-group').removeClass('has-error').removeClass('has-success');
-			  	  			
-			  	  			$('#edit-categories-messages').html('<div class="alert alert-success">'+
-			            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
-			            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
-				          '</div>');
-
-			  	  			$(".alert-success").delay(500).show(10, function() {
-										$(this).delay(3000).hide(10, function() {
-											$(this).remove();
-										});
-									}); // /.alert
-								}  // if
-
-							} // /success
-						}); // /ajax	
-					} // if
-
-
+							if(response.success == true) {
+								// reload the manage member table 
+								user_datatable.ajax.reload(null, false);									  	  			
+								
+								refreshEditModal();											
+							}  // if
+						} // /success
+					}); // /ajax
 					return false;
 				}); // /submit of edit categories form
 

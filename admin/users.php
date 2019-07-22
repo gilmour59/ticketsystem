@@ -18,7 +18,7 @@
                     </button>
                 </div>      
             </div>
-            <!-- Modal -->
+            <!-- Add Modal -->
             <form id="addUserForm" method="post">
                 <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog">
                     <div class="modal-dialog" role="document">
@@ -62,12 +62,63 @@
                     </div>
                 </div>
             </form>
+            <!-- Edit Modal -->
+            <form id="editUserForm" method="post">
+                <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Edit User</h5>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span>&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">                            
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input id="edit_username" type="text" name="edit_username" class="form-control" value="">
+                                    <div id="edit_username_invalid" class="invalid-feedback"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Role</label>
+                                    <select id="edit_role" name="edit_role" class="form-control">
+                                        <option value="normal">Normal</option>
+                                        <option value="admin">Admin</option>
+                                    </select>                                    
+                                </div>
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="change_password">
+                                    <label class="form-check-label" for="change_password">
+                                        Change Password???
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input id="edit_password" type="password" name="edit_password" class="form-control" value="">
+                                    <div id="edit_password_invalid" class="invalid-feedback"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Confirm Password</label>
+                                    <input id="edit_confirm_password" type="password" name="edit_confirm_password" class="form-control" value="">
+                                    <div id="edit_confirm_password_invalid" class="invalid-feedback"></div>
+                                </div>                            
+                            </div>
+                            <div id="editUserFooter" class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <span id="edit-loading" class="spinner-border spinner-border-sm d-none" role="status"></span>
+                                <input type="submit" class="btn btn-primary">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
             <table id="userTable" class="table table-striped table-sm table-hover">
                 <thead>
                     <th width="10%">Division</th>
                     <th width="10%">Username</th>
                     <th width="5%">Role</th>
                     <th width="10%">Created At</th>
+                    <th width="5%"></th>
                     <th width="5%"></th>
                 </thead>            
             </table>
