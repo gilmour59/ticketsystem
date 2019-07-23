@@ -111,9 +111,10 @@ function editUser(user_id = null) {
 		$.ajax({
 			url: 'get-selected-user.php',
 			type: 'post',
-			data: {user_id: user_id},
+			data: {edit_user_id: user_id},
 			dataType: 'json',
-			success:function(response) {				
+			success:function(response) {
+				console.log(response);
 				$("#edit_username").val(response.username);
 				$("#edit_role").val(response.role);
 				//$("#edit_division").val(response.division);
@@ -143,16 +144,14 @@ function editUser(user_id = null) {
 								// reload the manage member table 
 								user_datatable.ajax.reload(null, false);									  	  			
 								
-								refreshEditModal();											
-							}  // if
-						} // /success
-					}); // /ajax
+								refreshEditModal();
+							} 
+						}
+					});
 					return false;
-				}); // /submit of edit categories form
-
-			} // /success
-		}); // /fetch the selected categories data
-
+				});
+			}
+		});
 	} else {
 		alert('Oops!! Refresh the page');
 	}
