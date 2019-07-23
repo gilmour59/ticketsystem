@@ -1,3 +1,5 @@
+var user_datatable;
+
 function refreshAddModal(){	
 	// remove text from invalid
 	$('.invalid-feedback').text('');
@@ -7,7 +9,7 @@ function refreshAddModal(){
 }
 
 $(document).ready(function() {
-    var user_datatable = $('#userTable').DataTable({
+    user_datatable = $('#userTable').DataTable({
         'ajax': 'get-users.php',
         'order': [],
 	});
@@ -60,6 +62,7 @@ $(document).ready(function() {
 							// reload the manage member table 
 							user_datatable.ajax.reload(null, false);	
 
+							$('#addUserModal').modal('hide');
 							// reset the form text
 							$("#addUserForm")[0].reset();					
 							refreshAddModal();		
@@ -84,7 +87,6 @@ $(document).ready(function() {
 					}
 				});
 			}						
-			return false;
 		});
 	});
 });
@@ -110,11 +112,10 @@ function editUser(user_id = null) {
 
 		$.ajax({
 			url: 'get-selected-user.php',
-			type: 'post',
+			type: 'POST',
 			data: {edit_user_id: user_id},
 			dataType: 'json',
-			success:function(response) {
-				console.log(response);
+			success: function(response) {
 				$("#edit_username").val(response.username);
 				$("#edit_role").val(response.role);
 				//$("#edit_division").val(response.division);
@@ -127,28 +128,54 @@ function editUser(user_id = null) {
 
 					refreshEditModal();
 
-					var form = $(this);
-					// button loading
-					$("#edit-loading").removeClass('d-none');
+					var edit_username = $('#edit_username').val();
 
-					$.ajax({
-						url : form.attr('action'),
-						type: form.attr('method'),
-						data: form.serialize(),
-						dataType: 'json',
-						success:function(response) {
-							// remove loading
-							$("#edit-loading").addClass('d-none');
-
-							if(response.success == true) {
-								// reload the manage member table 
-								user_datatable.ajax.reload(null, false);									  	  			
-								
-								refreshEditModal();
-							} 
-						}
-					});
-					return false;
+					if(edit_username == "") {
+						$("#edit_username").addClass('is-invalid');
+						$('#edit_username_invalid').text('Username should not be empty!');
+					}
+					
+					if(edit_username){
+						var form = $(this);
+					
+						// button loading
+						$("#edit-loading").removeClass('d-none');
+	
+						$.ajax({
+							url : 'edit-user.php',
+							type: 'POST',
+							data: form.serialize(),
+							dataType: 'json',
+							success: function(response) {
+								// remove loading
+								$("#edit-loading").addClass('d-none');								
+								if(response.success == true) {
+									// reload the manage member table 
+									user_datatable.ajax.reload(null, false);									  	  			
+									
+									$('#editUserModal').modal('hide');
+									
+									refreshEditModal();									
+								}else if(response.success == false){
+									if(response.messages.username){
+										$('#edit_username').addClass('is-invalid');
+										$('#edit_username_invalid').text(response.messages.username);
+									}
+									if(response.messages.password){
+										$('#edit_password').addClass('is-invalid');
+										$('#edit_password_invalid').text(response.messages.password);
+									}
+									if(response.messages.confirm_password){
+										$('#edit_confirm_password').addClass('is-invalid');
+										$('#edit_confirm_password_invalid').text(response.messages.confirm_password);
+									}
+									if(response.messages.error){
+										//toastr
+									}
+								} 
+							}
+						});	
+					}									
 				});
 			}
 		});
