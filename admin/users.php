@@ -47,6 +47,12 @@
                                     </select>                                    
                                 </div>
                                 <div class="form-group">
+                                    <label>Division</label>
+                                    <select name="division" id="division" class="form-control">
+                                        <!-- ajax -->
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <label>Password</label>
                                     <input id="password" type="password" name="password" class="form-control" value="">
                                     <div id="password_invalid" class="invalid-feedback"></div>
@@ -89,6 +95,12 @@
                                         <option value="normal">Normal</option>
                                         <option value="admin">Admin</option>
                                     </select>                                    
+                                </div>
+                                <div class="form-group">
+                                    <label>Division</label>
+                                    <select name="edit_division" id="edit_division" class="form-control">
+                                        <!-- ajax -->
+                                    </select>
                                 </div>
                                 <div class="form-check mb-2">
                                     <input class="form-check-input" type="checkbox" id="change_password">

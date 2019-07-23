@@ -11,6 +11,6 @@
   if (isset($_SESSION['role']) && $_SESSION['role'] !== 'admin') {
     // The user name/password are incorrect so send the authentication headers
     header('HTTP/1.1 401 Unauthorized');
-    exit('Sorry, you must be authorized to access this page. <button onclick="goBack()">Go Back</button> <script> function goBack(){window.history.back()} </script>');
+    exit('Sorry, you must be authorized to access this page. <a href="/ticketsystem/welcome.php">Go Back</a>');
   }
 ?>

@@ -14,6 +14,20 @@ $(document).ready(function() {
         'order': [],
 	});
 
+	//fetch division data
+	$.ajax({
+		url: 'get-divisions.php',
+		type: 'GET',
+		dataType: 'json',
+		success: function(response) {
+			console.log(response);
+			for(var i = 0; i < response.length; i++){
+				$('#division').append('<option value='+ response[i].division_id +'>' + response[i].name + '</option>');
+				$('#edit_division').append('<option value='+ response[i].division_id +'>' + response[i].name + '</option>');
+			}			
+		}
+	});
+
 	//checkbox on edit model
 	$('#edit_password').prop('disabled', true);
 	$('#edit_confirm_password').prop('disabled', true);
@@ -118,7 +132,7 @@ function editUser(user_id = null) {
 			success: function(response) {
 				$("#edit_username").val(response.username);
 				$("#edit_role").val(response.role);
-				//$("#edit_division").val(response.division);
+				$("#edit_division").val(response.division_id);
 
 				// add the user id 
 				$("#editUserFooter").after('<input type="hidden" name="edit_user_id" id="edit_user_id" value="' + response.user_id + '" />');
