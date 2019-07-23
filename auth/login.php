@@ -89,12 +89,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             }                                                    
                         } else{
                             // Display an error message if password is not valid
-                            $password_err = "The password you entered was not valid.";
+                            $password_err = "Invalid Password!";
                         }
                     }
                 } else{
                     // Display an error message if username doesn't exist
-                    $username_err = "No account found with that username.";
+                    $username_err = "Invalid Username!";
                 }
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
@@ -125,6 +125,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <link rel="stylesheet" type="text/css" href="../css/login/daterangepicker.css">    
         <link rel="stylesheet" type="text/css" href="../css/login/util.css">
         <link rel="stylesheet" type="text/css" href="../css/login/main.css">
+        <link rel="stylesheet" href="../css/toastr.min.css">
         <style>
             .login-form-btn-black{
                 font-family: OpenSans-Bold;
@@ -191,5 +192,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <script src="../js/login/daterangepicker.js"></script>
         <script src="../js/login/countdowntime.js"></script>
         <script src="../js/login/main.js"></script>
+        <script src="../js/toastr.min.js"></script>
+        <script>
+            <?php 
+                if($username_err){
+            ?>
+                toastr.error(<?php echo "'$username_err'" ?>);
+            <?php 
+                }else if($password_err){                    
+            ?>
+                toastr.error(<?php echo "'$password_err'" ?>);
+            <?php
+                } 
+            ?>
+        </script>
     </body>
 </html>
