@@ -7,7 +7,7 @@
     /* Attempt to connect to MySQL database */
     $link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
                 
-    $query = "SELECT division_id, division FROM divisions ORDER BY division ASC";            
+    $query = "SELECT division_id, division FROM division ORDER BY division ASC";            
     $result = mysqli_query($link, $query);
 
     if (mysqli_num_rows($result) > 0){

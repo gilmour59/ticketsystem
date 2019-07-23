@@ -9,7 +9,7 @@
                 
     $query = "SELECT user_id, division, username, role, created_at 
             FROM users
-            INNER JOIN divisions ON users.division_id = divisions.division_id 
+            INNER JOIN division ON users.division_id = division.division_id 
             ORDER BY created_at DESC, role ASC, division ASC";
 
     $result = mysqli_query($link, $query);
