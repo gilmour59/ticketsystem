@@ -183,3 +183,30 @@ function editUser(user_id = null) {
 		alert('Oops!! Refresh the page');
 	}
 }
+
+// remove user function
+function deleteUser(user_id = null, username = null) {
+	$('#deleteUsername').text('Are you sure you want to delete "' + username + '"??!');
+	$(document).on('submit', '#deleteUserForm', function(event){
+		event.preventDefault();
+
+		$.ajax({
+			url: 'delete-user.php',
+			type: 'post',
+			data: {user_id: user_id},
+			dataType: 'json',
+			success:function(response) {
+				if(response.success == true){
+					console.log(response.messages);
+					
+					// reload the manage member table 
+					user_datatable.ajax.reload(null, false);
+
+					$('#deleteUserModal').modal('hide');					
+				}else if(response.success == false){
+					console.log(response.messages);
+				}
+			}
+		});
+	});		
+}

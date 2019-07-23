@@ -15,9 +15,10 @@
     if (mysqli_num_rows($result) > 0){
         while ($row = mysqli_fetch_array($result)) {
             $user_id = $row[0];
+            $username = $row[2];
 
             $button_edit = '<button type="button" class="btn btn-sm btn-info" data-toggle="modal" id="editUserModalBtn" data-target="#editUserModal" onclick="editUser(' . $user_id . ')">Edit</button>';
-            $button_delete = '<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" id="deleteUserModalBtn" data-target="#deleteUserModal" onclick="deleteUser(' . $user_id . ')">Delete</button>';
+            $button_delete = '<button type="button" class="btn btn-sm btn-danger" data-toggle="modal" id="deleteUserModalBtn" data-target="#deleteUserModal" onclick="deleteUser(' . $user_id . ',\'' . $username . '\')">Delete</button>';
                 
             $output['data'][] = array($row[1], $row[2], $row[3], $row[4], $button_edit, $button_delete);
         }

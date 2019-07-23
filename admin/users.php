@@ -116,6 +116,28 @@
                     </div>
                 </div>
             </form>
+            <!-- Delete Modal -->
+            <form action="" id="deleteUserForm">                
+                <div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" style="z-index:9999">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Delete User</h5>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span>&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p id="deleteUsername" class="font-weight-bold"></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No, Go Back!</button>
+                                <input type="submit" class="btn btn-danger" value="Delete!">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
             <table id="userTable" class="table table-striped table-sm table-hover">
                 <thead>
                     <th width="10%">Division</th>
