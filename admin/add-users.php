@@ -86,16 +86,17 @@
         if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
             
             // Prepare an insert statement
-            $sql = "INSERT INTO users (username, password, role) VALUES (?, ?, ?)";
+            $sql = "INSERT INTO users (username, password, role, division_id) VALUES (?, ?, ?, ?)";
             
             if($stmt = mysqli_prepare($link, $sql)){
                 // Bind variables to the prepared statement as parameters
-                mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_password, $param_role);
+                mysqli_stmt_bind_param($stmt, "ssss", $param_username, $param_password, $param_role, $param_division_id);
                 
                 // Set parameters
                 $param_username = $username;
                 $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
                 $param_role = $_POST["role"];
+                $param_division_id = $_POST["division"];
                 
                 // Attempt to execute the prepared statement
                 if(mysqli_stmt_execute($stmt)){

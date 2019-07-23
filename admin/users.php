@@ -9,6 +9,7 @@
         <title>Users</title>
         <link rel="stylesheet" href="../css/bootstrap.min.css">
         <link rel="stylesheet" href="../datatables/datatables.min.css">
+        <link rel="stylesheet" href="../css/toastr.min.css">
     </head>
     <body>
         <div class="container">     
@@ -166,5 +167,6 @@
         <script src="../js/bootstrap.min.js"></script>
         <script src="../datatables/datatables.min.js"></script>
         <script src="../js/users.js"></script>
+        <script src="../js/toastr.min.js"></script>
     </body>
 </html>

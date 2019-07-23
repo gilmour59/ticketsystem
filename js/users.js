@@ -20,10 +20,9 @@ $(document).ready(function() {
 		type: 'GET',
 		dataType: 'json',
 		success: function(response) {
-			console.log(response);
 			for(var i = 0; i < response.length; i++){
-				$('#division').append('<option value='+ response[i].division_id +'>' + response[i].name + '</option>');
-				$('#edit_division').append('<option value='+ response[i].division_id +'>' + response[i].name + '</option>');
+				$('#division').append('<option value='+ response[i].division_id +'>' + response[i].division + '</option>');
+				$('#edit_division').append('<option value='+ response[i].division_id +'>' + response[i].division + '</option>');
 			}			
 		}
 	});
@@ -71,7 +70,6 @@ $(document).ready(function() {
 					success:function(response) {
 						//remove loading
 						$("#add-loading").addClass('d-none');
-						console.log(response);
 						if(response.success == true) {
 							// reload the manage member table 
 							user_datatable.ajax.reload(null, false);	
@@ -80,7 +78,9 @@ $(document).ready(function() {
 							// reset the form text
 							$("#addUserForm")[0].reset();					
 							refreshAddModal();		
-																				
+
+							toastr.success('Added a User Successfully!');
+							
 						}else if(response.success == false){
 							if(response.messages.username){
 								$('#username').addClass('is-invalid');
@@ -95,7 +95,7 @@ $(document).ready(function() {
 								$('#confirm_password_invalid').text(response.messages.confirm_password);
 							}
 							if(response.messages.error){
-								//toastr
+								toastr.error(response.messages.error);
 							}
 						}
 					}
@@ -169,7 +169,10 @@ function editUser(user_id = null) {
 									
 									$('#editUserModal').modal('hide');
 									
-									refreshEditModal();									
+									refreshEditModal();
+
+									toastr.success('User Updated!');
+
 								}else if(response.success == false){
 									if(response.messages.username){
 										$('#edit_username').addClass('is-invalid');
@@ -184,7 +187,7 @@ function editUser(user_id = null) {
 										$('#edit_confirm_password_invalid').text(response.messages.confirm_password);
 									}
 									if(response.messages.error){
-										//toastr
+										toastr.error(response.messages.error);
 									}
 								} 
 							}
@@ -211,14 +214,14 @@ function deleteUser(user_id = null, username = null) {
 			dataType: 'json',
 			success:function(response) {
 				if(response.success == true){
-					console.log(response.messages);
+					toastr.success('Deleted Successfully');
 					
 					// reload the manage member table 
 					user_datatable.ajax.reload(null, false);
 
 					$('#deleteUserModal').modal('hide');					
 				}else if(response.success == false){
-					console.log(response.messages);
+					toastr.error(response.messages);
 				}
 			}
 		});

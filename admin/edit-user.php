@@ -96,16 +96,17 @@
             if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
                 
                 // Prepare an insert statement
-                $sql = "UPDATE users SET username = ?, password = ?, role = ? WHERE user_id = $user_id";
+                $sql = "UPDATE users SET username = ?, password = ?, role = ?, division_id = ? WHERE user_id = $user_id";
                 
                 if($stmt = mysqli_prepare($link, $sql)){
                     // Bind variables to the prepared statement as parameters
-                    mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_password, $param_role);
+                    mysqli_stmt_bind_param($stmt, "ssss", $param_username, $param_password, $param_role, $param_division_id);
                     
                     // Set parameters
                     $param_username = $username;
                     $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
                     $param_role = $_POST["edit_role"];
+                    $param_division_id = $_POST["edit_division"];
                     
                     // Attempt to execute the prepared statement
                     if(mysqli_stmt_execute($stmt)){
@@ -126,15 +127,16 @@
             if(empty($username_err)){
                 
                 // Prepare an insert statement
-                $sql = "UPDATE users SET username = ?, role = ? WHERE user_id = $user_id";
+                $sql = "UPDATE users SET username = ?, role = ?, division_id = ? WHERE user_id = $user_id";
                 
                 if($stmt = mysqli_prepare($link, $sql)){
                     // Bind variables to the prepared statement as parameters
-                    mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_role);
+                    mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_role, $param_division_id);
                     
                     // Set parameters
                     $param_username = $username;
                     $param_role = $_POST["edit_role"];
+                    $param_division_id = $_POST["edit_division"];
                     
                     // Attempt to execute the prepared statement
                     if(mysqli_stmt_execute($stmt)){
